@@ -1,0 +1,493 @@
+/* Proposition épurée C3 Tétris — surcharge isolée de la feuille d’origine.
+   Palette, polices, contenus, liens et fonctionnalités sont conservés. */
+:root {
+  --border: 1.5px solid var(--ink);
+  --shadow-hard: 2px 2px 0 rgba(33, 28, 23, .14);
+  --shadow-hard-sm: 1px 1px 0 rgba(33, 28, 23, .12);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+body { line-height: 1.68; }
+.navbar { background: var(--cream); border-bottom-width: 1px; }
+.brand { transform: none; box-shadow: none; border-radius: 8px; }
+.brand:hover { transform: translateY(1px); box-shadow: none; }
+.nav-cta, .nav-toggle { box-shadow: none; }
+.header-contact-link { box-shadow: none; border-radius: 6px; }
+.nav-desktop a[href="professionnels.html"], .nav-mobile a[href="professionnels.html"],
+.nav-desktop a[href="associations.html"], .nav-mobile a[href="associations.html"],
+.nav-desktop a[href="particuliers.html"], .nav-mobile a[href="particuliers.html"] {
+  border-width: 1px;
+  border-radius: 5px;
+  box-shadow: none;
+}
+.nav-desktop a[href="professionnels.html"]:hover, .nav-desktop a[href="associations.html"]:hover,
+.nav-desktop a[href="particuliers.html"]:hover, .nav-mobile a[href="professionnels.html"]:hover,
+.nav-mobile a[href="associations.html"]:hover, .nav-mobile a[href="particuliers.html"]:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.section { padding-block: clamp(68px, 8vw, 108px); }
+.section-heading { margin-bottom: 36px; }
+.section-heading > p:last-child { font-size: 17px; }
+.eyebrow {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--secondary);
+  font-size: 11px;
+  letter-spacing: .11em;
+}
+.eyebrow-dot { width: 6px; height: 6px; box-shadow: none; }
+.button { border-width: 1.5px; box-shadow: none; }
+.button:hover { transform: translateY(1px); box-shadow: none; }
+.button-primary, .button-light { box-shadow: none; }
+
+.title-chip--phrase {
+  padding: .04em .14em .07em;
+  border-width: 1px;
+  border-radius: 5px;
+  box-shadow: none;
+}
+.title-chip:not(.title-chip--phrase) {
+  padding: 0 .02em .04em;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+}
+.title-chip--peach:not(.title-chip--phrase) { background-image: linear-gradient(transparent 72%, rgba(207, 143, 99, .42) 72%); }
+.title-chip--mint:not(.title-chip--phrase) { background-image: linear-gradient(transparent 72%, rgba(168, 176, 176, .52) 72%); }
+.title-chip--yellow:not(.title-chip--phrase) { background-image: linear-gradient(transparent 72%, rgba(207, 174, 118, .48) 72%); }
+.title-chip--pink:not(.title-chip--phrase) { background-image: linear-gradient(transparent 72%, rgba(230, 210, 202, .72) 72%); }
+.hero { padding-block: clamp(52px, 7vw, 86px) clamp(68px, 9vw, 116px); }
+.hero-grid { gap: clamp(38px, 6vw, 76px); }
+.hero-notes { gap: 7px 20px; margin-top: 22px; }
+.hero-notes span {
+  position: relative;
+  padding: 0 0 0 14px;
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none;
+  font-size: 13px;
+}
+.hero-notes span::before {
+  position: absolute;
+  top: .62em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--peach);
+  content: "";
+}
+.hero-notes span:nth-child(2)::before { background: var(--mint); }
+.portrait-frame {
+  padding: 8px;
+  border-width: 1.5px;
+  box-shadow: 2px 2px 0 rgba(33, 28, 23, .16);
+}
+.portrait-frame::before { display: none; }
+.portrait-frame img { border-width: 1.5px; border-radius: 0; }
+.caption-mark { flex-basis: 28px; width: 28px; height: 28px; border: 0; background: transparent; box-shadow: none; font-size: 18px; }
+
+.audience-card, .service-card {
+  min-height: 0;
+  padding: 25px 25px 23px;
+  border: 1px solid rgba(33, 28, 23, .24);
+  border-top: 3px solid var(--card-accent, var(--peach));
+  border-radius: 10px;
+  background: var(--white);
+  box-shadow: none;
+}
+.audience-card { transition: border-color .15s ease, transform .15s ease; }
+.audience-card:hover { transform: translateY(-2px); box-shadow: none; }
+.audience-card-business { --card-accent: var(--mint); background: var(--white); }
+.audience-card-association { --card-accent: var(--peach); background: var(--white); }
+.audience-card-personal { --card-accent: var(--pink); background: var(--white); }
+.service-card:nth-child(1) { --card-accent: var(--yellow); background: var(--white); }
+.service-card:nth-child(2) { --card-accent: var(--mint); background: var(--white); }
+.service-card:nth-child(3) { --card-accent: var(--peach); background: var(--white); }
+.service-grid--association .service-card:nth-child(4) { --card-accent: var(--pink); background: var(--white); }
+.card-number, .service-index { margin-bottom: 16px; color: var(--secondary); font-size: 13px; }
+.audience-card h3, .service-card h3 { margin-bottom: 10px; }
+.audience-card p, .service-card p { font-size: 14px; }
+.portfolio-card, .card {
+  padding: 25px;
+  border: 1px solid rgba(33, 28, 23, .24);
+  border-radius: 10px;
+  background: var(--white);
+  box-shadow: none;
+}
+.portfolio-page-preview { padding: 6px; border: 1px solid rgba(33, 28, 23, .26); border-radius: 6px; box-shadow: none; }
+
+.location-line { border-top: 1px solid rgba(33, 28, 23, .24); }
+.audience-note {
+  padding: 24px;
+  border: 1px solid rgba(33, 28, 23, .2);
+  border-left: 3px solid var(--yellow);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: none;
+  transform: none;
+}
+.audience-note p { margin-bottom: 14px; font-size: 19px; }
+.section-contact { background: var(--sec-tint); }
+.contact-panel {
+  padding: clamp(28px, 4vw, 46px);
+  border: 1px solid rgba(33, 28, 23, .22);
+  border-left: 4px solid var(--peach);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: none;
+}
+.contact-panel > div:first-child > p:not(.eyebrow) { font-size: 16px; }
+.contact-details { border-left-style: solid; border-left-width: 1px; }
+.contact-details a, .contact-details p { gap: 5px; }
+.calendly-float { border-width: 1.5px; box-shadow: 1px 1px 0 rgba(33, 28, 23, .2); }
+.calendly-float:hover { transform: translateY(1px); box-shadow: none; }
+
+.footer { border-top-width: 1px; }
+.footer-links { border-left-color: rgba(255, 255, 255, .17); }
+.social-links a { border-radius: 5px; box-shadow: none; }
+.footer-bottom { border-top-color: rgba(255, 255, 255, .15); }
+
+.legal .label { border-width: 1px; border-radius: 5px; box-shadow: none; }
+.legal-card--terra { border-top: 3px solid var(--peach); background: var(--white); }
+.legal-card--pink { border-top: 3px solid var(--pink); background: var(--white); }
+.legal-card--blue { border-top: 3px solid var(--mint); background: var(--white); }
+.legal-note { border-top: 1px solid rgba(33, 28, 23, .24); }
+
+/* Fonds différenciés et encadrés repris dans l’esprit du bandeau supérieur. */
+:root {
+  --soft-peach: #efd8c7;
+  --soft-mint: #d1d9da;
+  --soft-yellow: #f0e1bd;
+  --soft-pink: #edd8d2;
+}
+.section-soft { background: var(--soft-peach); }
+#apropos { background: var(--soft-mint); }
+#about { background: var(--soft-pink); }
+#travaux { background: var(--soft-peach); }
+.section-contact { background: var(--soft-yellow); }
+
+.title-chip:not(.title-chip--phrase) {
+  padding: .03em .09em .06em;
+  border: 1px solid var(--ink);
+  border-radius: 5px;
+  box-shadow: 1px 1px 0 rgba(33, 28, 23, .14);
+}
+.title-chip--peach:not(.title-chip--phrase) { background: var(--peach); }
+.title-chip--mint:not(.title-chip--phrase) { background: var(--mint); }
+.title-chip--yellow:not(.title-chip--phrase) { background: var(--yellow); }
+.title-chip--pink:not(.title-chip--phrase) { background: var(--pink); }
+.title-chip--phrase { border-width: 1.5px; border-radius: 8px; box-shadow: 2px 2px 0 rgba(33, 28, 23, .14); }
+
+.hero-notes span {
+  padding: 6px 10px;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 1px 1px 0 rgba(33, 28, 23, .12);
+  background: var(--soft-peach) !important;
+}
+.hero-notes span:nth-child(2) { background: var(--soft-mint) !important; }
+.hero-notes span:nth-child(3) { background: var(--soft-pink) !important; }
+.hero-notes span::before { display: none; }
+
+.portrait-frame { border-radius: 20px; box-shadow: 2px 2px 0 rgba(33, 28, 23, .18); }
+.portrait-frame img { border-radius: 13px; }
+
+.audience-card, .service-card {
+  border: 1.5px solid var(--ink);
+  border-top: 3px solid var(--card-accent, var(--peach));
+  border-radius: 12px;
+  box-shadow: 2px 2px 0 rgba(33, 28, 23, .14);
+}
+.audience-card-business { background: var(--mint); }
+.audience-card-association { background: var(--peach); }
+.audience-card-personal { background: var(--pink); }
+.service-card:nth-child(1) { background: var(--yellow); }
+.service-card:nth-child(2) { background: var(--mint); }
+.service-card:nth-child(3) { background: var(--peach); }
+.service-grid--association .service-card:nth-child(4) { background: var(--pink); }
+.audience-card p, .service-card p, .card-number, .service-index { color: var(--ink); }
+
+.portfolio-card, .card {
+  border-width: 1.5px;
+  border-radius: 12px;
+  box-shadow: 2px 2px 0 rgba(33, 28, 23, .14);
+}
+.portfolio-card:nth-child(1) { background: var(--soft-yellow); }
+.portfolio-card:nth-child(2) { background: var(--soft-mint); }
+.portfolio-page-preview:nth-child(4n + 1) { background: var(--soft-yellow); }
+.portfolio-page-preview:nth-child(4n + 2) { background: var(--soft-peach); }
+.portfolio-page-preview:nth-child(4n + 3) { background: var(--soft-mint); }
+.portfolio-page-preview:nth-child(4n) { background: var(--soft-pink); }
+
+.audience-note {
+  border-radius: 12px;
+  background: var(--yellow);
+  box-shadow: 2px 2px 0 rgba(33, 28, 23, .14);
+}
+.contact-panel {
+  border-radius: 14px;
+  background: var(--peach);
+  box-shadow: 2px 2px 0 rgba(33, 28, 23, .14);
+}
+.legal-card:not(.legal-card--terra):not(.legal-card--pink):not(.legal-card--blue) { background: var(--soft-yellow); }
+.legal-card--terra { background: var(--soft-peach); }
+.legal-card--pink { background: var(--soft-pink); }
+.legal-card--blue { background: var(--soft-mint); }
+
+@media (max-width: 800px) {
+  .contact-panel { padding: 25px 22px; }
+  .contact-details { border-left: 0; border-top: 1px solid rgba(33, 28, 23, .22); }
+}
+@media (max-width: 540px) {
+  .section { padding-block: 60px; }
+  .hero { padding-top: 38px; }
+  .audience-card, .service-card, .portfolio-card, .card { padding: 21px; }
+  .contact-panel { border-left-width: 3px; }
+}
+
+@media (max-width: 360px) {
+  .hero { padding-top: 26px; }
+  .audience-hero { padding-block: 28px; }
+  .hero-copy h1, .audience-hero h1 { font-size: 31px; line-height: 1.08; }
+  .hero-lead { margin-top: 14px; margin-bottom: 9px; font-size: 16px; line-height: 1.42; }
+  .hero-audience, .service-area { margin-bottom: 14px; font-size: 13px; line-height: 1.42; }
+  .hero-actions { gap: 10px; }
+  .hero-actions .button { min-height: 42px; padding: 9px 14px; font-size: 14px; }
+  .hero-notes { margin-top: 12px; }
+  .calendly-float {
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    min-height: 34px;
+    padding: 4px 8px;
+    gap: 4px;
+    font-size: 10px;
+  }
+  .calendly-float svg { width: 14px; height: 14px; }
+}
+
+@media (max-width: 430px) {
+  .calendly-float { min-height: 32px; padding: 4px 6px; gap: 3px; }
+  .calendly-label-mobile { font-size: 0; }
+  .calendly-label-mobile::after { content: "RDV"; font-size: 10px; font-weight: 700; }
+  .calendly-float svg { width: 14px; height: 14px; }
+}
+
+/* ===== Version 2 : bandeau du haut, portrait rond et couleurs repris du site C3 Tétris d'origine ===== */
+:root {
+  /* Fonds de section : mêmes teintes que le site d'origine, déclinées en versions douces */
+  --soft-peach: var(--sec-tint);                          /* #ecd8c3 : teinte de section d'origine */
+  --soft-mint: color-mix(in srgb, var(--mint) 42%, var(--cream));
+  --soft-yellow: color-mix(in srgb, var(--yellow) 38%, var(--cream));
+  --soft-pink: color-mix(in srgb, var(--pink) 78%, var(--cream));
+  --border: 2.5px solid var(--ink);
+  --shadow-hard: 5px 5px 0 var(--ink);
+  --shadow-hard-sm: 3px 3px 0 var(--ink);
+}
+
+/* Bandeau : identique au site d'origine (fond terracotta clair, filet épais, cartouche C3 Tétris incliné) */
+.navbar { background: var(--sec-tint); border-bottom: var(--border); }
+.navbar-inner { min-height: 84px; }
+.brand {
+  gap: 6px;
+  padding: 8px 18px;
+  border: var(--border);
+  border-radius: 12px;
+  background: var(--yellow);
+  box-shadow: var(--shadow-hard-sm);
+  font-size: clamp(24px, 2.4vw, 32px);
+  transform: rotate(-1.5deg);
+}
+.brand:hover { transform: rotate(0) translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.brand-mark { font-size: .72em; }
+.nav-desktop { gap: 36px; }
+.nav-desktop ul { gap: 28px; }
+.nav-desktop a:not(.nav-cta),
+.nav-desktop a[href="professionnels.html"], .nav-desktop a[href="associations.html"], .nav-desktop a[href="particuliers.html"],
+.nav-mobile a[href="professionnels.html"], .nav-mobile a[href="associations.html"], .nav-mobile a[href="particuliers.html"] {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+.nav-mobile a[href="professionnels.html"], .nav-mobile a[href="associations.html"], .nav-mobile a[href="particuliers.html"] { display: block; padding: 10px 0; font-size: 17px; }
+.nav-desktop a:not(.nav-cta):hover,
+.nav-desktop a[href="professionnels.html"]:hover, .nav-desktop a[href="associations.html"]:hover, .nav-desktop a[href="particuliers.html"]:hover,
+.nav-mobile a[href="professionnels.html"]:hover, .nav-mobile a[href="associations.html"]:hover, .nav-mobile a[href="particuliers.html"]:hover {
+  color: var(--peach);
+  transform: none;
+  box-shadow: none;
+}
+.nav-desktop a[aria-current="page"] { color: var(--ink); text-decoration-color: var(--ink); }
+.nav-desktop .nav-cta { display: none; }
+.nav-desktop .nav-contact--desktop {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: right;
+}
+.nav-desktop .nav-contact--desktop a { font-size: 13px; text-decoration: none; }
+.nav-toggle { background: var(--white); box-shadow: var(--shadow-hard-sm); }
+.nav-mobile { background: var(--sec-tint); border-top: var(--border); }
+.header-contact-strip { background: var(--sec-tint); border-top: 1px solid rgba(33, 28, 23, .24); }
+.header-contact-link { border-width: 1.5px; box-shadow: none; background: var(--white); }
+
+/* Portrait : cadre rond (au lieu du cadre carré) */
+.hero-portrait { display: grid; justify-items: center; }
+.portrait-frame {
+  width: min(100%, 440px);
+  padding: 10px;
+  border: var(--border);
+  border-radius: 50%;
+  background: var(--peach);
+  box-shadow: var(--shadow-hard);
+}
+.portrait-frame::before {
+  display: block;
+  top: 10%;
+  left: 12%;
+  width: 28px;
+  height: 28px;
+  background: var(--yellow);
+}
+.portrait-frame img {
+  border: var(--border);
+  border-radius: 50%;
+  background: var(--cream);
+  object-position: 50% 18%;
+}
+.hero-portrait figcaption { justify-content: center; }
+
+/* Fonds différenciés d'une section à l'autre, dans la palette d'origine */
+.hero, .audience-hero { background: var(--cream); }
+.section-soft { background: var(--soft-peach); }
+#apropos { background: var(--soft-mint); }
+#about { background: var(--soft-pink); }
+#travaux { background: var(--soft-peach); }
+.section-contact { background: var(--soft-yellow); }
+
+/* Boutons, encadrés et cartes : même graphisme que le bandeau (filet épais + ombre franche) */
+.button { border: var(--border); }
+.button-primary { background: var(--yellow); box-shadow: var(--shadow-hard-sm); }
+.button-light { background: var(--white); box-shadow: var(--shadow-hard-sm); }
+.button:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+.audience-card, .service-card, .portfolio-card, .card, .audience-note, .contact-panel {
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-hard-sm);
+}
+.audience-card, .service-card { border-top: var(--border); }
+.contact-panel { border-left: var(--border); background: var(--peach); }
+.calendly-float { border: var(--border); box-shadow: var(--shadow-hard-sm); }
+.footer { border-top: var(--border); }
+.contact-panel .eyebrow { color: var(--ink); }
+
+/* ===== Version 3 ===== */
+/* Alternance des fonds identique au site d'origine : crème / terracotta clair, une section sur deux */
+main > section:nth-of-type(odd) { background: var(--cream) !important; }
+main > section:nth-of-type(even) { background: var(--sec-tint) !important; }
+main > section.section--home { background: var(--cream) !important; }
+
+/* Portrait : visage centré dans un cadre rond sur le fond sombre du site actuel */
+.portrait-frame {
+  width: min(100%, 440px);
+  padding: 5.5%;
+  background: #1c1f24;
+}
+.portrait-frame::before { display: none; }
+.portrait-frame img {
+  border: 0;
+  background: #eeece0;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* Bandeau : même comportement que le site d'origine à toutes les largeurs (menu burger, pas de bandeau de contact supplémentaire) */
+:root { --nav-h: 84px; }
+.header-contact-strip { display: none !important; }
+.navbar-inner { min-height: 84px; }
+.nav-toggle {
+  width: auto;
+  height: auto;
+  padding: 8px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.nav-toggle span { width: 26px; }
+.nav-mobile { padding: 20px 24px; }
+.nav-mobile a { font-size: 18px; font-weight: 600; }
+.nav-mobile .nav-contact { flex-direction: column; gap: 0; margin-top: 16px; font-size: 15px; line-height: 1.4; }
+@media (max-width: 1100px) {
+  .nav-desktop { display: none; }
+  .nav-toggle { display: flex; }
+}
+@media (max-width: 800px) {
+  :root { --nav-h: 84px; }
+}
+
+/* ===== Version 4 ===== */
+/* Rond du portrait : retour à la couleur terracotta */
+.portrait-frame { background: var(--peach); }
+
+/* « Cécilia » dans un encadré coloré (section À propos) */
+.name-box {
+  display: inline-block;
+  padding: .02em .22em .06em;
+  border: var(--border);
+  border-radius: 12px;
+  background: var(--yellow);
+  box-shadow: var(--shadow-hard-sm);
+  transform: rotate(-1.5deg);
+}
+
+/* « Me contacter par e-mail » / premier échange : bouton coloré */
+.contact-actions .button-light { background: var(--mint); }
+.contact-actions .button-light:hover { background: var(--pink); }
+
+/* Pages Professionnels / Associations / Particuliers : encadré d'introduction de couleur distincte */
+.audience-note--pro { background: var(--mint); }
+.audience-note--asso { background: var(--peach); }
+.audience-note--part { background: var(--pink); }
+
+/* ===== Version 5 ===== */
+/* Cadre du portrait : épaisseur ramenée à 70 % de l'actuelle (5,5 % -> 3,85 %) */
+.portrait-frame { padding: 3.85%; }
+
+/* Mot-clé du titre encadré, de la même couleur que l'encadré de droite */
+.audience-hero h1 .title-chip { font-size: .93em; }
+
+/* ===== Version 6 ===== */
+/* Espace entre l'encadré « Cécilia » et le point */
+.name-box { margin-right: .2em; }
+
+/* Ligne « devis sans engagement · réponse sous 48 h » : seul élément mis en couleur (terracotta) sur les 3 pages publics */
+.process-panel .location-line {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 11px 18px;
+  border: var(--border);
+  border-radius: 12px;
+  background: var(--peach);
+  box-shadow: var(--shadow-hard-sm);
+  color: var(--ink);
+}

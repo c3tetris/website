@@ -34,3 +34,32 @@ if ('IntersectionObserver' in window) {
 } else {
   revealEls.forEach((el) => el.classList.add('is-visible'));
 }
+
+// Avoid overlapping the contact panel while keeping one booking action visible.
+const floatingCalendly = document.querySelector('.calendly-float');
+const inlineCalendly = document.querySelector('.contact-booking');
+
+if (floatingCalendly && inlineCalendly && 'IntersectionObserver' in window) {
+  const updateBookingVisibility = () => {
+    const rect = inlineCalendly.getBoundingClientRect();
+    const inlineIsVisible = rect.width > 0 && rect.height > 0
+      && rect.bottom > 0 && rect.top < window.innerHeight
+      && rect.right > 0 && rect.left < window.innerWidth;
+    floatingCalendly.classList.toggle('is-replaced-by-inline', inlineIsVisible);
+  };
+  const bookingObserver = new IntersectionObserver(updateBookingVisibility, { threshold: 0.3 });
+  bookingObserver.observe(inlineCalendly);
+  window.addEventListener('scroll', updateBookingVisibility, { passive: true });
+  window.addEventListener('resize', updateBookingVisibility);
+  updateBookingVisibility();
+}
+
+// Calendly popup; the visible link remains a fallback if the widget cannot load.
+document.querySelectorAll('[data-calendly-popup]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+      event.preventDefault();
+      window.Calendly.initPopupWidget({ url: link.href });
+    }
+  });
+});
